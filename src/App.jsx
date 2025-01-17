@@ -1,14 +1,18 @@
 import { useState } from 'react'
 import './output.css';
+import NotificationAlert from './NotificationAlert';
+import ErrorAlert from './ErrorAlert';
 
 function App() {
 
   const [emailAddress, setEmailAddress] = useState('');
+  const [showAlert, setShowAlert] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   async function sendPostRequest() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(emailAddress)) {
-      alert('Please enter a valid email address.');
+      setShowAlert(true)
       return;
     }
     // Add your post request logic here
@@ -27,10 +31,11 @@ function App() {
         body: JSON.stringify(data)
       }).then((response) => {
         if (response.status === 200) {
-          alert('Thank you for your interest! We will contact you shortly.');
+          setShowInfo(true);
         }
         if (response.status === 500) {
           alert(response.statusText);
+          console.error(response);
         }
 
         if (!response.ok) {
@@ -51,6 +56,8 @@ function App() {
 
   return (
     <div>
+      {showAlert ? <ErrorAlert message="Please enter a valid email address." onClose={() => setShowAlert(false)}/> : null}
+      {showInfo ? <NotificationAlert message="Thank you for your interest! We will contact you shortly." onClose={() => setShowInfo(false)}/> : null}
       <div id="hero" className="mt-[10vh] lg:mx-64 py-8 bg-white/70 md:mx-auto max-w-fit">
         <p className="pl-5 text-5xl text-left font-black font-[Palatino] drop-shadow-xl">
           Focus on Work,
