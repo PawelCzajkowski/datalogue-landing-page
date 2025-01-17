@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './output.css';
+import monitorImage from './assets/monitor2.png'; // Import the image
 
 function App() {
 
@@ -45,7 +46,7 @@ function App() {
   };
 
   return (
-      <div className="md:h-screen md:bg-contain md:bg-right md:bg-scroll bg-no-repeat md:bg-[url('src/res/monitor2.png')]">
+      <div>
         <div id="hero" className="mt-[10vh] lg:mx-64 py-8 bg-white/70 md:mx-auto max-w-fit">
           <p className="pl-5 text-5xl text-left font-black font-[Palatino] drop-shadow-xl">
             Focus on Work,
