@@ -2,12 +2,17 @@ import { useState } from 'react'
 import './output.css';
 import NotificationAlert from './NotificationAlert';
 import ErrorAlert from './ErrorAlert';
+import ReactPlayer from 'react-player/youtube';
+import useMeasure from 'react-use-measure';
 
 function App() {
 
   const [emailAddress, setEmailAddress] = useState('');
   const [showAlert, setShowAlert] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [ref, bounds] = useMeasure();
+
+  const videoURL = "https://youtu.be/TTwCqraaTRE"
 
   async function sendPostRequest() {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -54,23 +59,33 @@ function App() {
     }
   };
 
+  let videoHeight = (bounds.width/1920)*1080;
+  console.log(videoHeight);
+
   return (
     <div>
       {showAlert ? <ErrorAlert message="Please enter a valid email address." onClose={() => setShowAlert(false)}/> : null}
       {showInfo ? <NotificationAlert message="Thank you for your interest! We will contact you shortly." onClose={() => setShowInfo(false)}/> : null}
-      <div id="hero" className="mt-[10vh] lg:mx-64 py-8 bg-white/70 md:mx-auto max-w-fit">
+      <div id="hero" className="mt-[5vh] mx-[5vw] lg:mx-64 py-8 bg-white/70 md:mx-auto max-w-fit">
         <p className="pl-5 text-5xl text-left font-black font-[Palatino] drop-shadow-xl">
           Focus on Work,
           <br /> Not the Search
         </p>
-        <div className="px-4 text-lg justify-normal">
+        <div ref={ref} className="px-4 text-lg justify-normal">
           <p className="mt-10">
-            Streamline your workflow with our intelligent Q&A agent.
+          Do you have dozens of files but don’t know which one contains the information you need?
             <br />
-            Select the documents you need, ask your question,
+            Standard search tools rely on keywords, but what if you don’t know the correct one?
+          </p>
+          <p className="mt-8">
+            Check <span className="font-bold italic">datalogue!</span>
+            <br />
+             Create a collection of documents you need, ask your question,
             <br />
             and get precise answers with sources — saving you time and effort.
           </p>
+          <ReactPlayer url={videoURL} className="mt-4 md:mx-auto max-w-full" style={{ maxHeight: `${videoHeight}px` }} />
+          
           <p className="mt-10 font-semibold text-lg">Key Benefits:</p>
           <ul className="*:text-lg">
             <li>
@@ -112,7 +127,7 @@ function App() {
           </form>
         </div>
       </div>
-      <div id="footer" className="mx-auto md:fixed bottom-0 w-full bg-white/70 text-center py-4">
+      <div id="footer" className="mx-auto bottom-0 w-full bg-white/70 text-center py-4">
         Designed by Paweł Czajkowski 2025
       </div>
     </div>
