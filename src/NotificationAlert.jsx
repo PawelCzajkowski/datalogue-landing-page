@@ -2,7 +2,7 @@ import React from 'react';
 
 const NotificationAlert = ({ message, onClose }) => {
     return (
-        <div className="bg-blue-400/80 text-blue-700 absolute top-0 left-1/2 -translate-x-1/2  py-3 px-4 w-fit z-50" role="alert">
+        <div className="bg-blue-400/80 text-blue-700 sticky bottom-4 left-1/2 -translate-x-1/2  py-3 px-4 w-fit z-50" role="alert">
             <span className="block sm:inline">{message}</span>
             <span className="float-right">
                 <svg 

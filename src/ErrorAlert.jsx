@@ -2,7 +2,7 @@ import React from 'react';
 
 const ErrorAlert = ({ message, onClose }) => {
     return (
-        <div className="bg-red-400/80 text-red-700 absolute top-0 left-1/2 -translate-x-1/2  py-3 px-4 w-fit z-50" role="alert">
+        <div className="bg-red-400/80 text-red-700 sticky top-4 left-1/2 -translate-x-1/2  py-3 px-4 w-fit z-50" role="alert">
             <span className="block sm:inline">{message}</span>
             <span className="float-right">
                 <svg 
